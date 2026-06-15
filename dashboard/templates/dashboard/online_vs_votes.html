@@ -1,0 +1,47 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Online vs Votes | Observatory{% endblock %}
+{% block content %}
+<section class="page-header">
+  <p class="eyebrow">Main research answer</p>
+  <h1>Online Network Signals vs Actual Votes</h1>
+  <p class="lead">This page compares Twitter/X visibility and network centrality against actual Senate vote outcomes.</p>
+</section>
+<section class="grid two">
+  <div class="panel">
+    <h2>Metric correlations</h2>
+    <div class="iframe-wrap small"><iframe src="{{ artifacts.correlations }}"></iframe></div>
+  </div>
+  <div class="panel">
+    <h2>Vote rank vs mention rank</h2>
+    <div class="iframe-wrap small"><iframe src="{{ artifacts.vote_rank_vs_mention_rank }}"></iframe></div>
+  </div>
+</section>
+<section class="panel">
+  <h2>Online overperformance / underperformance</h2>
+  <div class="iframe-wrap"><iframe src="{{ artifacts.overperformance }}"></iframe></div>
+</section>
+<section class="grid two">
+  <div class="panel">
+    <h2>Online-overrepresented candidates</h2>
+    <table><thead><tr><th>Candidate</th><th>Vote rank</th><th>Online rank</th><th>Difference</th></tr></thead><tbody>
+      {% for row in overrepresented %}<tr><td>{{ row.candidate }}</td><td>{{ row.vote_rank }}</td><td>{{ row.twitter_mention_count_rank }}</td><td>{{ row.twitter_mention_count_overperformance }}</td></tr>{% endfor %}
+    </tbody></table>
+  </div>
+  <div class="panel">
+    <h2>Online-underrepresented candidates</h2>
+    <table><thead><tr><th>Candidate</th><th>Vote rank</th><th>Online rank</th><th>Difference</th></tr></thead><tbody>
+      {% for row in underrepresented %}<tr><td>{{ row.candidate }}</td><td>{{ row.vote_rank }}</td><td>{{ row.twitter_mention_count_rank }}</td><td>{{ row.twitter_mention_count_overperformance }}</td></tr>{% endfor %}
+    </tbody></table>
+  </div>
+</section>
+<section class="panel">
+  <h2>Top-12 overlap by online metric</h2>
+  <div class="iframe-wrap"><iframe src="{{ artifacts.top12_overlap }}"></iframe></div>
+</section>
+<section class="panel">
+  <h2>Correlation table</h2>
+  <table><thead><tr><th>Online metric</th><th>Spearman r</th><th>Pearson r</th><th>Kendall tau</th><th>n</th></tr></thead><tbody>
+    {% for row in correlations %}<tr><td>{{ row.online_metric }}</td><td>{{ row.spearman_r_vs_votes|floatformat:3 }}</td><td>{{ row.pearson_r_vs_votes|floatformat:3 }}</td><td>{{ row.kendall_tau_vs_votes|floatformat:3 }}</td><td>{{ row.n_candidates_with_metric }}</td></tr>{% endfor %}
+  </tbody></table>
+</section>
+{% endblock %}

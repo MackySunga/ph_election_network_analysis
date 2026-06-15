@@ -1,0 +1,24 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Election Outcome | Observatory{% endblock %}
+{% block content %}
+<section class="page-header">
+  <p class="eyebrow">Ground-truth outcome layer</p>
+  <h1>Actual Senate Election Outcome</h1>
+  <p class="lead">This page anchors the project in the actual vote result. The Top 12 are treated as the winning candidates for the online-vs-outcome comparison.</p>
+</section>
+<section class="panel">
+  <h2>National ranking chart</h2>
+  <div class="iframe-wrap"><iframe src="{{ artifacts.actual_vote_ranking }}"></iframe></div>
+</section>
+<section class="panel">
+  <h2>Top 12 Senate winners</h2>
+  <table>
+    <thead><tr><th>Rank</th><th>Candidate</th><th>Party</th><th>Total votes</th><th>Vote share</th></tr></thead>
+    <tbody>
+      {% for row in top12 %}
+      <tr><td>{{ row.vote_rank }}</td><td>{{ row.candidate }}</td><td>{{ row.party }}</td><td>{{ row.total_votes }}</td><td>{{ row.vote_share_of_valid_votes|floatformat:4 }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

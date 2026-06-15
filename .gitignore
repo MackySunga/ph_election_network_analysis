@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+
+# Django/runtime
+db.sqlite3
+staticfiles/
+media/
+*.log
+
+# Raw datasets are intentionally excluded from GitHub
+# Place them manually in data/raw/ after cloning/forking.
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/README_PLACE_RAW_DATA_HERE.md
+
+# Generated analysis outputs are intentionally excluded.
+data/processed/*
+!data/processed/.gitkeep
+!data/processed/README_GENERATED.md
+
+outputs/**
+!outputs/
+!outputs/.gitkeep
+!outputs/README_GENERATED.md
+!outputs/figures/
+!outputs/figures/.gitkeep
+!outputs/interactive/
+!outputs/interactive/.gitkeep
+!outputs/tables/
+!outputs/tables/.gitkeep
+!outputs/networks/
+!outputs/networks/.gitkeep
+!outputs/report_assets/
+!outputs/report_assets/.gitkeep
+!outputs/run_logs/
+!outputs/run_logs/.gitkeep
+!outputs/executed_notebooks/
+!outputs/executed_notebooks/.gitkeep
+
+# Large packaged exports
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

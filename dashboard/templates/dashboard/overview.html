@@ -1,0 +1,66 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Overview | Election Network Observatory{% endblock %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">Phase 2B Dashboard</p>
+  <h1>Philippine Election 2025 Network Observatory</h1>
+  <p class="lead">A Django dashboard for exploring how Twitter/X election discourse formed networks of candidates, hashtags, users, and topics — and how those network signals aligned with actual Senate election outcomes.</p>
+</section>
+
+<section class="metric-grid">
+  {% for card in cards %}
+  <div class="metric-card">
+    <div class="metric-label">{{ card.label }}</div>
+    <div class="metric-value">{{ card.value }}</div>
+    <div class="metric-note">{{ card.note }}</div>
+  </div>
+  {% endfor %}
+</section>
+
+<section class="grid two">
+  <div class="panel">
+    <h2>Core research question</h2>
+    <p>Did Twitter/X network visibility reflect actual Senate election outcomes, or did it mainly reveal online attention, controversy, amplification, and community structure?</p>
+    <div class="finding good">Main finding: online and network metrics aligned strongly with votes, but did not perfectly reproduce the Top 12 winners.</div>
+  </div>
+  <div class="panel">
+    <h2>Network science logic</h2>
+    <ul class="clean-list">
+      <li><strong>Nodes:</strong> candidates, hashtags, users, topics</li>
+      <li><strong>Edges:</strong> co-mentions, co-occurrences, replies, candidate-hashtag links</li>
+      <li><strong>Metrics:</strong> PageRank, weighted degree, betweenness, communities, density</li>
+      <li><strong>Outcome layer:</strong> actual vote rank and Top 12 winner labels</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Actual vote ranking snapshot</h2>
+  <div class="iframe-wrap small"><iframe src="{{ artifacts.actual_vote_ranking }}"></iframe></div>
+</section>
+
+<section class="grid two">
+  <div class="panel">
+    <h2>Top 6 actual winners</h2>
+    <table>
+      <thead><tr><th>Rank</th><th>Candidate</th><th>Party</th><th>Votes</th></tr></thead>
+      <tbody>
+        {% for row in top12 %}
+        <tr><td>{{ row.vote_rank }}</td><td>{{ row.candidate }}</td><td>{{ row.party }}</td><td>{{ row.total_votes }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="panel">
+    <h2>Strongest online-vote alignments</h2>
+    <table>
+      <thead><tr><th>Metric</th><th>Spearman r</th></tr></thead>
+      <tbody>
+        {% for row in correlations %}
+        <tr><td>{{ row.online_metric }}</td><td>{{ row.spearman_r_vs_votes|floatformat:3 }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

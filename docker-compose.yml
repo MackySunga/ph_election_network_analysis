@@ -1,0 +1,23 @@
+services:
+  jupyter:
+    build: .
+    container_name: ph-election-network-jupyter
+    working_dir: /app
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+    command: bash docker/start_jupyter.sh
+
+  dashboard:
+    build: .
+    container_name: ph-election-network-dashboard
+    working_dir: /app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      DJANGO_DEBUG: "1"
+      DJANGO_ALLOWED_HOSTS: "127.0.0.1,localhost,0.0.0.0,*"
+    command: bash docker/start_dashboard.sh

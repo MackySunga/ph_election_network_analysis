@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+.git/
+.gitignore
+
+# Keep Docker build context small; mount these with docker compose instead.
+data/raw/*
+data/processed/*
+outputs/*
+*.zip
+*.tar
+*.tar.gz

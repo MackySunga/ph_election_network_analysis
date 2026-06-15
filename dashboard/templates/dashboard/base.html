@@ -1,0 +1,37 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Philippine Election 2025 Network Observatory{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'dashboard/css/observatory.css' %}">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">PH</div>
+      <div>
+        <div class="brand-title">Election Network Observatory</div>
+        <div class="brand-subtitle">Twitter/X × Senate 2025</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a class="{% if active == 'overview' %}active{% endif %}" href="{% url 'dashboard:overview' %}">Overview</a>
+      <a class="{% if active == 'election_outcome' %}active{% endif %}" href="{% url 'dashboard:election_outcome' %}">Election Outcome</a>
+      <a class="{% if active == 'twitter_analytics' %}active{% endif %}" href="{% url 'dashboard:twitter_analytics' %}">Twitter/X Analytics</a>
+      <a class="{% if active == 'network_science' %}active{% endif %}" href="{% url 'dashboard:network_science' %}">Network Science</a>
+      <a class="{% if active == 'online_vs_votes' %}active{% endif %}" href="{% url 'dashboard:online_vs_votes' %}">Online vs Votes</a>
+      <a class="{% if active == 'geography' %}active{% endif %}" href="{% url 'dashboard:geography' %}">Geography</a>
+      <a class="{% if active == 'storytelling' %}active{% endif %}" href="{% url 'dashboard:storytelling' %}">Animated Storytelling</a>
+      <a class="{% if active == 'interpretation' %}active{% endif %}" href="{% url 'dashboard:interpretation' %}">Interpretation</a>
+    </nav>
+    <div class="sidebar-note">
+      Phase 2B Django dashboard. Includes Phase 2A networks and animated temporal storytelling.
+    </div>
+  </aside>
+  <main class="content">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

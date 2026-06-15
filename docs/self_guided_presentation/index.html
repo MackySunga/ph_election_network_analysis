@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Philippine Election 2025 Network Science — Self-Guided Interactive Slide App</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="appShell">
+    <aside id="slideMenu" class="menu open">
+      <div class="brand">
+        <div class="brandMark">PH</div>
+        <div>
+          <strong>Election Network Observatory</strong>
+          <small>Self-guided interactive presentation</small>
+        </div>
+      </div>
+      <nav id="slideNav"></nav>
+      <div class="menuFooter">
+        <strong>Prepared by:</strong><br/>Bob Mathew D. Sunga, MSc<br/><br/>
+        <span>Keys:</span> ← → Space · <span>M</span> menu
+      </div>
+    </aside>
+
+    <main class="deck">
+      <div class="topBar">
+        <button id="menuToggle" class="ghostBtn" aria-label="Toggle slide menu">☰</button>
+        <div class="progressWrap"><div id="progressBar"></div></div>
+        <div id="slideCounter">1 / 16</div>
+        <div class="authorChip">Bob Mathew D. Sunga, MSc</div>
+      </div>
+
+      <section class="slide active hero" data-title="Title">
+        <div class="heroGrid">
+          <div class="heroCopy">
+            <p class="eyebrow">Phase 3C · Self-Guided Interactive HTML/CSS/JS Application</p>
+            <h1>Online Attention, Network Centrality, and Electoral Outcomes</h1>
+            <p class="lead">A web-ready interactive presentation of Philippine Election 2025 Twitter/X discourse as a network science study.</p>
+            <div class="authorBlock">
+              <span>Prepared by</span>
+              <strong>Bob Mathew D. Sunga, MSc</strong>
+            </div>
+            <div class="readerPanel glass">
+              <h3>How to read this app</h3>
+              <p>This version is written so it can be uploaded to a web server and still make sense without a live presenter. Each slide includes the visual, the interpretation, and the reason the result matters.</p>
+            </div>
+            <div class="heroActions">
+              <button class="primaryBtn" data-next>Start presentation</button>
+              <button class="secondaryBtn" data-jump="6">Open network explorer</button>
+            </div>
+          </div>
+          <div class="heroVisual card glass">
+            <div id="heroNetwork" class="miniNetwork"></div>
+            <p class="caption"><strong>Core idea:</strong> candidates, hashtags, and users are not isolated items. They form a political communication system where position, connection, and community structure matter.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Research Problem">
+        <div class="slideHeader">
+          <p class="eyebrow">Research Problem</p>
+          <h2>Can online political networks reflect actual election outcomes?</h2>
+          <p class="subhead">The project studies whether Twitter/X election discourse behaves like a measurable communication network, and whether that network aligns with Senate vote outcomes.</p>
+        </div>
+        <div class="twoCol">
+          <div class="card bigText">
+            <p>The 2025 Philippine Senate election generated large volumes of Twitter/X discourse. Instead of treating those posts as isolated messages, this study treats them as connected traces of public attention: candidates mentioned together, hashtags used together, users replying or mentioning others, and topics attaching to political actors.</p>
+            <p class="keyLine">The goal is not to claim that Twitter/X directly predicts elections. The goal is to test whether online visibility, network centrality, and discourse position reflect actual electoral performance.</p>
+          </div>
+          <div class="card darkCard">
+            <h3>Research questions</h3>
+            <ul class="checkList">
+              <li>Which candidates and hashtags became structurally central?</li>
+              <li>Which nodes connected separate discourse communities?</li>
+              <li>Did online network prominence align with actual vote rank?</li>
+              <li>Which candidates were overrepresented or underrepresented online?</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Dataset Overview">
+        <div class="slideHeader">
+          <p class="eyebrow">Data Foundation</p>
+          <h2>Three datasets became one research system</h2>
+          <p class="subhead">The study combines online discourse, known public-author metadata, and official Senate vote results to connect digital attention with electoral outcomes.</p>
+        </div>
+        <div class="metricGrid" id="overviewMetrics"></div>
+        <div class="pipeline card">
+          <div class="pipeStep">Twitter/X posts</div>
+          <div class="pipeArrow">→</div>
+          <div class="pipeStep">Entities</div>
+          <div class="pipeArrow">→</div>
+          <div class="pipeStep">Networks</div>
+          <div class="pipeArrow">→</div>
+          <div class="pipeStep">Centrality</div>
+          <div class="pipeArrow">→</div>
+          <div class="pipeStep">Election comparison</div>
+        </div>
+        <div class="explainGrid">
+          <div class="card miniExplain"><h3>Why this matters</h3><p>The datasets are linked through candidates. Twitter/X produces online visibility measures; the Senate dataset provides the actual vote outcome used for comparison.</p></div>
+          <div class="card miniExplain"><h3>Important caution</h3><p>Twitter/X is not the electorate. It is a platform sample shaped by users, media, controversy, and campaign activity. That is why the study focuses on alignment, not prediction.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Actual Results">
+        <div class="slideHeader">
+          <p class="eyebrow">Ground Truth Layer</p>
+          <h2>Actual Senate winners and vote ranks</h2>
+          <p class="subhead">This slide establishes the official electoral outcome against which all online and network metrics are compared.</p>
+        </div>
+        <div class="chartLayout">
+          <div class="card chartCard"><div id="voteRankChart" class="chart"></div></div>
+          <div class="card insightCard">
+            <h3>How to interpret the chart</h3>
+            <p>The bars show actual national vote totals for the leading Senate candidates. This is the baseline outcome layer of the research.</p>
+            <p>The Top 12 candidates are treated as winners, while ranks 13–66 are treated as non-winners for comparison. Later slides ask whether online centrality and mention visibility identify these same candidates.</p>
+            <p class="keyLine">This is the ground truth: online networks are evaluated against these actual vote results.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Tweets to Network">
+        <div class="slideHeader">
+          <p class="eyebrow">Network Construction Simulation</p>
+          <h2>How one tweet becomes a network relationship</h2>
+          <p class="subhead">This simulation demonstrates the logic of the entire project: text is transformed into nodes and edges.</p>
+        </div>
+        <div class="simGrid">
+          <div class="card">
+            <h3>Try the tweet-to-network builder</h3>
+            <p class="caption">Edit the sample text or click “Sample tweet.” The app extracts candidate names and hashtags, then converts them into a small network.</p>
+            <textarea id="tweetInput" rows="5">Bam Aquino and Kiko Pangilinan trend with #Halalan2025 and #Eleksyon2025 as voters discuss the Senate race.</textarea>
+            <div class="buttonRow">
+              <button class="primaryBtn" id="buildTweetNetwork">Build network</button>
+              <button class="secondaryBtn" id="sampleTweet">Sample tweet</button>
+            </div>
+            <div id="extractionResult" class="extractBox"></div>
+            <div class="readerPanel"><strong>Reader note:</strong> a candidate-candidate edge is formed when candidates appear together. A candidate-hashtag edge is formed when a candidate and hashtag appear together.</div>
+          </div>
+          <div class="card"><div id="tweetNetworkSim" class="networkBox"></div></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Network Concepts">
+        <div class="slideHeader">
+          <p class="eyebrow">Network Science Framework</p>
+          <h2>Nodes, edges, weights, centrality, and communities</h2>
+          <p class="subhead">These are the concepts used to interpret the election discourse as a complex communication structure.</p>
+        </div>
+        <div class="conceptGrid">
+          <div class="concept card" data-concept="node"><h3>Node</h3><p>A candidate, hashtag, user, or topic that appears in the discourse.</p></div>
+          <div class="concept card" data-concept="edge"><h3>Edge</h3><p>A relationship, such as co-mentioned candidates or co-occurring hashtags.</p></div>
+          <div class="concept card" data-concept="weight"><h3>Weight</h3><p>The strength of a relationship, usually based on frequency.</p></div>
+          <div class="concept card" data-concept="centrality"><h3>Centrality</h3><p>How structurally important a node is inside the network.</p></div>
+          <div class="concept card" data-concept="bridge"><h3>Bridge</h3><p>A node that connects different parts of the discourse.</p></div>
+          <div class="concept card" data-concept="community"><h3>Community</h3><p>A cluster of nodes that are more connected to each other than to the rest of the network.</p></div>
+        </div>
+        <div class="card conceptStage"><div id="conceptNetwork" class="networkBox small"></div></div>
+      </section>
+
+      <section class="slide networkSlide" data-title="Candidate Network">
+        <div class="slideHeader">
+          <p class="eyebrow">Interactive Network 1</p>
+          <h2>Candidate Co-Mention Network</h2>
+          <p class="subhead">Candidates are connected when they appeared in the same tweet. Size shows PageRank. Thicker lines show stronger co-mention relationships.</p>
+        </div>
+        <div class="networkLayout">
+          <div class="card controls">
+            <h3>How to read this graph</h3>
+            <p class="caption">Each node is a Senate candidate. A line means two candidates were discussed together in the same tweet. This does not automatically mean support; it means discourse association.</p>
+            <label>Minimum edge weight <span id="candThresholdLabel">50</span></label>
+            <input type="range" id="candThreshold" min="10" max="500" value="50" step="10" />
+            <button class="secondaryBtn" data-reset-network="candidateNetwork">Reset layout</button>
+            <div id="candidateDetails" class="detailsBox">Hover or click a node. Look for large central candidates and thick edges such as Bam Aquino–Kiko Pangilinan, Bong Go–Bato Dela Rosa, and Ben Tulfo–Erwin Tulfo.</div>
+            <div class="networkTakeaway">Takeaway: co-mention networks reveal discourse clusters and candidate relationships, not just candidate popularity.</div>
+          </div>
+          <div class="card networkCard"><div id="candidateNetwork" class="networkBox"></div></div>
+        </div>
+      </section>
+
+      <section class="slide networkSlide" data-title="Hashtag Network">
+        <div class="slideHeader">
+          <p class="eyebrow">Interactive Network 2</p>
+          <h2>Hashtag Co-Occurrence Network</h2>
+          <p class="subhead">Hashtags are connected when they appeared in the same tweet. The graph reveals how election topics and media labels connected.</p>
+        </div>
+        <div class="networkLayout">
+          <div class="card controls">
+            <h3>How to read this graph</h3>
+            <p class="caption">Each node is a hashtag. Lines show co-use. Large central nodes act as discourse hubs, while bridge hashtags connect different hashtag communities.</p>
+            <label>Minimum edge weight <span id="hashThresholdLabel">100</span></label>
+            <input type="range" id="hashThreshold" min="10" max="1000" value="100" step="10" />
+            <button class="secondaryBtn" data-reset-network="hashtagNetwork">Reset layout</button>
+            <div id="hashtagDetails" class="detailsBox">#halalan2025 should appear as the main connective hub. #eleksyon2025 and #comelec help structure the public election conversation.</div>
+            <div class="networkTakeaway">Takeaway: important hashtags are not only frequent; they can also connect otherwise separate conversations.</div>
+          </div>
+          <div class="card networkCard"><div id="hashtagNetwork" class="networkBox"></div></div>
+        </div>
+      </section>
+
+      <section class="slide networkSlide" data-title="Bipartite Network">
+        <div class="slideHeader">
+          <p class="eyebrow">Interactive Network 3</p>
+          <h2>Candidate–Hashtag Bipartite Network</h2>
+          <p class="subhead">Candidates connect to hashtags used with them. This visualizes the discourse ecosystem surrounding political actors.</p>
+        </div>
+        <div class="networkLayout">
+          <div class="card controls">
+            <h3>How to read this graph</h3>
+            <p class="caption">Blue nodes are candidates. Yellow nodes are hashtags. A line means a candidate appeared in tweets using that hashtag.</p>
+            <label>Minimum edge weight <span id="biThresholdLabel">10</span></label>
+            <input type="range" id="biThreshold" min="5" max="250" value="10" step="5" />
+            <button class="secondaryBtn" data-reset-network="bipartiteNetwork">Reset layout</button>
+            <div id="bipartiteDetails" class="detailsBox">Use this graph to see which candidates share hashtags, which hashtags cross candidate communities, and which candidates have broad discourse ecosystems.</div>
+            <div class="networkTakeaway">Takeaway: this is the strongest network science visual because it links political actors to discourse markers.</div>
+          </div>
+          <div class="card networkCard"><div id="bipartiteNetwork" class="networkBox"></div></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Time Story">
+        <div class="slideHeader">
+          <p class="eyebrow">Animated Time Story</p>
+          <h2>How attention changed over time</h2>
+          <p class="subhead">This slide adds time to the network story. It shows that online visibility was not constant; candidate attention rose and faded across the election period.</p>
+        </div>
+        <div class="timelineLayout">
+          <div class="card chartCard wide"><div id="dailyTweetTimeline" class="chart"></div></div>
+          <div class="card controls">
+            <h3>Candidate attention race</h3>
+            <p class="caption">Press play to move through the timeline. The bars show which candidates received attention on a given date.</p>
+            <div class="buttonRow">
+              <button id="playTimeline" class="primaryBtn">Play</button>
+              <button id="pauseTimeline" class="secondaryBtn">Pause</button>
+            </div>
+            <input type="range" id="timeSlider" min="0" value="0" step="1" />
+            <div id="timeLabel" class="dateLabel"></div>
+            <div id="candidateRace" class="raceChart"></div>
+            <div class="readerPanel">Reader note: time matters because online political attention can spike due to news events, campaign activity, controversy, or election-day counting.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Correlation">
+        <div class="slideHeader">
+          <p class="eyebrow">Outcome Alignment</p>
+          <h2>Network metrics strongly aligned with actual votes</h2>
+          <p class="subhead">The strongest relationship was found between actual votes and online visibility/network embeddedness.</p>
+        </div>
+        <div class="chartLayout">
+          <div class="card chartCard"><div id="correlationChart" class="chart"></div></div>
+          <div class="card insightCard">
+            <h3>Key interpretation</h3>
+            <p>Mention count, co-mention weighted degree, unique hashtags, view count, and PageRank showed strong positive alignment with actual vote totals.</p>
+            <p>These are not merely popularity metrics. Co-mention weighted degree and PageRank describe how embedded a candidate is in the political communication network.</p>
+            <p class="keyLine">This is network evidence: structural embeddedness mattered more than simple viral engagement alone.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Online vs Votes">
+        <div class="slideHeader">
+          <p class="eyebrow">Outcome Comparison Simulator</p>
+          <h2>Online rank is related to vote rank, but not identical</h2>
+          <p class="subhead">This scatterplot compares Twitter/X mention rank against actual Senate vote rank. Lower ranks are better on both axes.</p>
+        </div>
+        <div class="chartLayout">
+          <div class="card chartCard"><div id="rankScatter" class="chart"></div></div>
+          <div class="card controls">
+            <h3>How to read it</h3>
+            <select id="scatterMode">
+              <option value="all">All candidates</option>
+              <option value="winners">Winners only</option>
+              <option value="nonwinners">Non-winners only</option>
+            </select>
+            <p class="caption">Points near the diagonal suggest online-vote alignment. Points far from the diagonal reveal mismatch.</p>
+            <div class="readerPanel">A candidate can be highly visible online without winning nationally. A candidate can also win despite being less dominant on Twitter/X.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Overperformance">
+        <div class="slideHeader">
+          <p class="eyebrow">Online Overperformance</p>
+          <h2>Who was louder online than electorally?</h2>
+          <p class="subhead">This slide shows the gap between online mention rank and actual vote rank.</p>
+        </div>
+        <div class="chartLayout">
+          <div class="card chartCard"><div id="overperformanceChart" class="chart"></div></div>
+          <div class="card insightCard">
+            <h3>What this reveals</h3>
+            <p>Positive values indicate candidates who ranked better online than in actual votes. Negative values indicate candidates who performed better electorally than their Twitter/X visibility suggested.</p>
+            <p>This distinction is crucial because online attention may come from controversy, activist communities, media cycles, or platform-specific demographics.</p>
+            <p class="keyLine">The chart separates online loudness from electoral strength.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Live Demo Flow">
+        <div class="slideHeader">
+          <p class="eyebrow">Live and Self-Guided Demonstration Flow</p>
+          <h2>Move from data to network to conclusion</h2>
+          <p class="subhead">This slide can guide a presenter, but it also helps web visitors know how to explore the app independently.</p>
+        </div>
+        <div class="demoFlow">
+          <div class="card demoStep" data-jump="4">
+            <div class="stepNum">01</div>
+            <h3>Build the network</h3>
+            <p>Start with the tweet-to-network simulator to see how text is converted into candidates, hashtags, nodes, and edges.</p>
+            <button class="secondaryBtn" data-jump="4">Open simulator</button>
+          </div>
+          <div class="card demoStep" data-jump="6">
+            <div class="stepNum">02</div>
+            <h3>Explore relationships</h3>
+            <p>Use the candidate co-mention graph to identify central actors, strong ties, and discourse clusters.</p>
+            <button class="secondaryBtn" data-jump="6">Open candidate network</button>
+          </div>
+          <div class="card demoStep" data-jump="9">
+            <div class="stepNum">03</div>
+            <h3>Show time effects</h3>
+            <p>Use the animated timeline to explain how candidate attention changed throughout the election period.</p>
+            <button class="secondaryBtn" data-jump="9">Open time story</button>
+          </div>
+          <div class="card demoStep" data-jump="11">
+            <div class="stepNum">04</div>
+            <h3>Defend the result</h3>
+            <p>End with online-vs-vote alignment and overperformance to show what Twitter/X captures and what it misses.</p>
+            <button class="secondaryBtn" data-jump="11">Open outcome comparison</button>
+          </div>
+        </div>
+        <div class="card presenterNote">
+          <strong>Self-guided note:</strong> Follow the slides from left to right. The presentation begins with the research question, demonstrates how networks were built, explores node-link networks, then compares online structure with actual votes.
+        </div>
+      </section>
+
+      <section class="slide" data-title="Limitations">
+        <div class="slideHeader">
+          <p class="eyebrow">Limitations</p>
+          <h2>What this project does not claim</h2>
+          <p class="subhead">The project is intentionally careful: it studies online political communication, not the full voting population.</p>
+        </div>
+        <div class="twoCol">
+          <div class="card bigText">
+            <p>This project does not claim that Twitter/X directly predicts elections. Online discourse is affected by platform demographics, controversy, campaigns, media activity, and the visibility of politically engaged communities.</p>
+            <p>The dataset captures one platform and one form of public expression. It does not measure private voting decisions, offline campaign machinery, regional political networks, or non-Twitter/X voter blocs.</p>
+          </div>
+          <div class="card darkCard">
+            <h3>Safe claim</h3>
+            <p>Twitter/X network centrality is a strong signal of online political attention and electoral visibility, but it is not a complete proxy for national voter behavior.</p>
+            <p>This is why the study reports alignment, overrepresentation, and underrepresentation rather than claiming perfect prediction.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Conclusion">
+        <div class="slideHeader">
+          <p class="eyebrow">Conclusion</p>
+          <h2>The election discourse behaved like a complex network</h2>
+        </div>
+        <div class="card conclusionCard">
+          <p>Philippine Election 2025 Twitter/X discourse formed connected networks of candidates, hashtags, users, and topics. Centrality measures and candidate–hashtag relationships strongly aligned with actual Senate vote outcomes, while also exposing important mismatches between online visibility and electoral strength.</p>
+          <p>For web visitors viewing this without a presenter, the key lesson is this: Twitter/X does not simply show who is popular. It shows how political attention is connected, amplified, clustered, and sometimes distorted by the platform environment.</p>
+          <p class="keyLine">Twitter/X is not a direct election predictor. It is a powerful network lens for studying political attention, discourse structure, and communication influence.</p>
+          <p class="finalCredit">Prepared by Bob Mathew D. Sunga, MSc</p>
+        </div>
+        <div class="heroActions center">
+          <button class="primaryBtn" data-jump="6">Revisit network explorer</button>
+          <button class="secondaryBtn" data-jump="0">Back to title</button>
+        </div>
+      </section>
+
+      <div class="bottomControls">
+        <button id="prevBtn" class="navBtn">← Previous</button>
+        <button id="nextBtn" class="navBtn">Next →</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="data/appData.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

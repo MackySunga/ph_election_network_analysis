@@ -1,0 +1,40 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Interpretation | Observatory{% endblock %}
+{% block content %}
+<section class="page-header">
+  <p class="eyebrow">Research discussion</p>
+  <h1>Interpretation and Final Takeaways</h1>
+  <p class="lead">The dashboard supports a careful conclusion: Twitter/X is a strong lens for online political attention and network structure, but it should not be treated as a direct representation of the whole electorate.</p>
+</section>
+<section class="grid two">
+  <div class="panel">
+    <h2>What the network science shows</h2>
+    <ul class="clean-list">
+      <li>Election discourse formed connected networks of candidates, hashtags, and users.</li>
+      <li>Hashtags such as <strong>#halalan2025</strong> served as discourse hubs.</li>
+      <li>Candidate co-mention patterns revealed visible discourse blocs.</li>
+      <li>Candidate-hashtag links showed each candidate's online discourse ecosystem.</li>
+      <li>Network centrality aligned strongly with actual votes, but imperfectly.</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h2>What the outcome comparison means</h2>
+    <p>High online visibility often coincided with electoral strength, but some candidates were louder online than their actual vote rank, while others performed strongly despite weaker Twitter/X presence.</p>
+    <div class="finding warning">Twitter/X measures online attention, controversy, and network embeddedness. It does not directly measure voter intent.</div>
+  </div>
+</section>
+<section class="panel">
+  <h2>Final research conclusion</h2>
+  <p class="large-text">The 2025 Philippine Senate election discourse on Twitter/X formed a measurable political communication network. Candidates and hashtags occupied different structural positions inside that network. Network centrality and online visibility strongly aligned with actual Senate vote outcomes, but the alignment was not perfect because Twitter/X overrepresented highly online, controversial, or urban-visible candidates while underrepresenting some candidates with stronger offline electoral machinery, regional support, or mass voter recognition.</p>
+</section>
+<section class="panel">
+  <h2>Limitations</h2>
+  <ul class="clean-list">
+    <li>Twitter/X users are not a representative sample of Filipino voters.</li>
+    <li>Mentions and co-mentions do not automatically mean support.</li>
+    <li>Candidate nickname matching can introduce ambiguity.</li>
+    <li>Network centrality reflects discourse structure, not causal electoral influence.</li>
+    <li>Some public/offline campaign effects are outside the dataset.</li>
+  </ul>
+</section>
+{% endblock %}

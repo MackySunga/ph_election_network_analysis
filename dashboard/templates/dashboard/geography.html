@@ -1,0 +1,37 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Geography | Observatory{% endblock %}
+{% block content %}
+<section class="page-header">
+  <p class="eyebrow">Philippine context layer</p>
+  <h1>Geographic Election Outcome Patterns</h1>
+  <p class="lead">This page helps test whether Twitter/X discourse resembles national voting behavior or more urban/NCR-style political attention.</p>
+</section>
+<section class="grid two">
+  <div class="panel">
+    <h2>Regional turnout and undervote</h2>
+    <div class="iframe-wrap small"><iframe src="{{ artifacts.regional_turnout }}"></iframe></div>
+  </div>
+  <div class="panel">
+    <h2>NCR vs national rank alignment</h2>
+    <div class="iframe-wrap small"><iframe src="{{ artifacts.ncr_alignment }}"></iframe></div>
+  </div>
+</section>
+<section class="panel">
+  <h2>NCR rank difference</h2>
+  <div class="iframe-wrap"><iframe src="{{ artifacts.ncr_difference }}"></iframe></div>
+</section>
+<section class="grid two">
+  <div class="panel">
+    <h2>Highest turnout regions</h2>
+    <table><thead><tr><th>Region</th><th>Turnout rate</th><th>Undervote rate</th></tr></thead><tbody>
+      {% for row in regional_turnout|slice:':12' %}<tr><td>{{ row.region }}</td><td>{{ row.turnout_rate|floatformat:3 }}</td><td>{{ row.undervote_rate|floatformat:3 }}</td></tr>{% endfor %}
+    </tbody></table>
+  </div>
+  <div class="panel">
+    <h2>NCR top candidates vs national rank</h2>
+    <table><thead><tr><th>NCR rank</th><th>Candidate</th><th>National rank</th><th>Rank difference</th></tr></thead><tbody>
+      {% for row in ncr_table %}<tr><td>{{ row.regional_rank }}</td><td>{{ row.candidate }}</td><td>{{ row.vote_rank }}</td><td>{{ row.ncr_minus_national_rank }}</td></tr>{% endfor %}
+    </tbody></table>
+  </div>
+</section>
+{% endblock %}

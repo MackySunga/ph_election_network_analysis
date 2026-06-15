@@ -1,0 +1,33 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Twitter/X Analytics | Observatory{% endblock %}
+{% block content %}
+<section class="page-header">
+  <p class="eyebrow">Communication analytics layer</p>
+  <h1>Twitter/X Election Discourse</h1>
+  <p class="lead">This page summarizes online visibility: who was mentioned, what hashtags became prominent, and how discourse markers organized the conversation.</p>
+</section>
+<section class="grid two">
+  <div class="panel">
+    <h2>Top candidate mentions</h2>
+    <table>
+      <thead><tr><th>Candidate</th><th>Mentions</th></tr></thead>
+      <tbody>{% for row in top_mentions %}<tr><td>{{ row.candidate }}</td><td>{{ row.count }}</td></tr>{% endfor %}</tbody>
+    </table>
+  </div>
+  <div class="panel">
+    <h2>Top hashtag hubs by PageRank</h2>
+    <table>
+      <thead><tr><th>Hashtag</th><th>PageRank</th><th>Weighted degree</th></tr></thead>
+      <tbody>{% for row in top_hash %}<tr><td>#{{ row.node }}</td><td>{{ row.pagerank|floatformat:4 }}</td><td>{{ row.weighted_degree }}</td></tr>{% endfor %}</tbody>
+    </table>
+  </div>
+</section>
+<section class="panel">
+  <h2>Hashtag network centrality</h2>
+  <div class="iframe-wrap"><iframe src="{{ artifacts.top_hashtags }}"></iframe></div>
+</section>
+<section class="panel">
+  <h2>Bridge hashtags</h2>
+  <div class="iframe-wrap"><iframe src="{{ artifacts.bridge_hashtags }}"></iframe></div>
+</section>
+{% endblock %}

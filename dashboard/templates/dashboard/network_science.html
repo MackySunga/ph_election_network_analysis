@@ -1,0 +1,52 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Network Science | Observatory{% endblock %}
+{% block content %}
+<section class="page-header">
+  <p class="eyebrow">Phase 2A + Phase 2B</p>
+  <h1>Network Science Visual Explorer</h1>
+  <p class="lead">These are node-link networks. Nodes represent candidates or hashtags. Edges represent co-mentions, co-occurrences, or candidate-hashtag associations. Node size reflects importance, and edge strength reflects relationship frequency.</p>
+</section>
+
+<section class="grid two">
+  <div class="panel">
+    <h2>Most central candidates by PageRank</h2>
+    <table>
+      <thead><tr><th>Candidate</th><th>PageRank</th><th>Weighted degree</th></tr></thead>
+      <tbody>{% for row in top_candidate_pr %}<tr><td>{{ row.node }}</td><td>{{ row.pagerank|floatformat:4 }}</td><td>{{ row.weighted_degree }}</td></tr>{% endfor %}</tbody>
+    </table>
+  </div>
+  <div class="panel">
+    <h2>Top candidate-hashtag nodes</h2>
+    <table>
+      <thead><tr><th>Node</th><th>Type</th><th>PageRank</th></tr></thead>
+      <tbody>{% for row in top_bipartite_candidates %}<tr><td>{{ row.node }}</td><td>{{ row.node_type }}</td><td>{{ row.pagerank|floatformat:4 }}</td></tr>{% endfor %}</tbody>
+    </table>
+  </div>
+</section>
+
+<section class="panel network-panel">
+  <h2>1. Candidate Co-Mention Network</h2>
+  <p class="caption">Candidates are connected when they appeared in the same tweet. Large nodes are structurally central candidates; thick edges are strong co-mention relationships.</p>
+  <div class="iframe-wrap network"><iframe src="{{ artifacts.phase2a_candidate }}"></iframe></div>
+</section>
+<section class="panel network-panel">
+  <h2>2. Hashtag Co-Occurrence Network</h2>
+  <p class="caption">Hashtags are connected when they appeared together. This shows the discourse structure of election tags.</p>
+  <div class="iframe-wrap network"><iframe src="{{ artifacts.phase2a_hashtag }}"></iframe></div>
+</section>
+<section class="panel network-panel">
+  <h2>3. Candidate–Hashtag Bipartite Network</h2>
+  <p class="caption">Candidates connect to hashtags that appeared with them. This reveals each candidate's discourse ecosystem.</p>
+  <div class="iframe-wrap network"><iframe src="{{ artifacts.phase2a_bipartite }}"></iframe></div>
+</section>
+<section class="panel network-panel">
+  <h2>4. Bridge Node Highlight Network</h2>
+  <p class="caption">Bridge nodes sit between communities. These are important because they connect different parts of the election conversation.</p>
+  <div class="iframe-wrap network"><iframe src="{{ artifacts.phase2a_bridge }}"></iframe></div>
+</section>
+<section class="panel network-panel">
+  <h2>5. Online Prominence vs Election Outcome Overlay</h2>
+  <p class="caption">This graph overlays online network prominence with actual Senate outcome labels.</p>
+  <div class="iframe-wrap network"><iframe src="{{ artifacts.phase2a_overlay }}"></iframe></div>
+</section>
+{% endblock %}
